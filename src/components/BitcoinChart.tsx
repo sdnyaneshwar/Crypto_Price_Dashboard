@@ -34,13 +34,18 @@ const BitcoinChart: React.FC<BitcoinChartProps> = ({ apiKey, coinId }) => {
 
   const fetchHistory = useCallback(async () => {
     try {
+      const end = Date.now();
+      const start = end - 6 * 60 * 60 * 1000;
       const res = await axios.get(
-        `https://rest.coincap.io/v3/assets/${coinId}/history?interval=d1&apiKey=${apiKey}`
+        `https://rest.coincap.io/v3/assets/${coinId}/history`,
+        {
+          params: { interval: "h1", start, end },
+          headers: { Authorization: `Bearer ${apiKey}` }
+        }
       );
-      const prices = res.data.data.map((point: any) => parseFloat(point.priceUsd));
-      const labels = res.data.data.map((point: any) =>
-        new Date(point.time).toLocaleDateString()
-      );
+      const data = res.data.data;
+      const labels = data.map((p: any) => new Date(p.time).toLocaleTimeString())
+      const prices = data.map((p: any) => parseFloat(p.priceUsd))
 
       setChartData({
         labels,
@@ -65,24 +70,14 @@ const BitcoinChart: React.FC<BitcoinChartProps> = ({ apiKey, coinId }) => {
 
   if (!chartData) return <p>Loading chart...</p>;
 
-  return <Line
-        data={chartData}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false, 
-          plugins: {
-            legend: { position: "top" as const },
-            title: {
-              display: true,
-              text: `${coinId.toUpperCase()} Price History`,
-            },
-          },
-          scales: {
-            x: { ticks: { maxRotation: 45, minRotation: 0 } },
-            y: { beginAtZero: false },
-          },
-        }}
-      />;
+   return (
+    <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 mt-6 w-full overflow-x-auto">
+      <h2 className="text-lg sm:text-xl font-bold mb-4 text-center sm:text-left">
+        {coinId.toUpperCase()} Price Trend (Last 6 Hours)
+      </h2>
+      <Line data={chartData} />
+    </div>
+  );
 };
 
 export default BitcoinChart;
