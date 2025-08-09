@@ -65,7 +65,24 @@ const BitcoinChart: React.FC<BitcoinChartProps> = ({ apiKey, coinId }) => {
 
   if (!chartData) return <p>Loading chart...</p>;
 
-  return <Line data={chartData} />;
+  return <Line
+        data={chartData}
+        options={{
+          responsive: true,
+          maintainAspectRatio: false, 
+          plugins: {
+            legend: { position: "top" as const },
+            title: {
+              display: true,
+              text: `${coinId.toUpperCase()} Price History`,
+            },
+          },
+          scales: {
+            x: { ticks: { maxRotation: 45, minRotation: 0 } },
+            y: { beginAtZero: false },
+          },
+        }}
+      />;
 };
 
 export default BitcoinChart;

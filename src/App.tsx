@@ -70,7 +70,7 @@ const App: React.FC = () => {
         ))}
       </div>
 
-      <div className="max-w-5xl mx-auto w-full">
+      <div className="max-w-6xl mx-auto w-full">
         <BitcoinChart apiKey={apiKey} coinId={selectedCoin} />
       </div>
     </div>
