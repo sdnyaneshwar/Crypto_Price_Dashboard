@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import CryptoCard from "./components/CryptoCard";
 import BitcoinChart from "./components/BitcoinChart";
@@ -8,13 +8,14 @@ const App: React.FC = () => {
   const [cryptoData, setCryptoData] = useState<CryptoData[]>([]);
   const [selectedCoin, setSelectedCoin] = useState<string>("bitcoin");
   const [countdown, setCountdown] = useState<number>(30);
-  const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY || "";
 
-  const fetchCryptoData = async () => {
+  // useCallback so fetchCryptoData reference stays stable
+  const fetchCryptoData = useCallback(async () => {
     try {
-      const res = await axios.get("https://rest.coincap.io/v3/assets", {
-        headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : {},
-      });
+      const res = await axios.get(
+        `https://rest.coincap.io/v3/assets?apiKey=${apiKey}`
+      );
       const allData = res.data.data;
       const filtered = allData.filter((c: any) =>
         ["bitcoin", "ethereum", "dogecoin"].includes(c.id)
@@ -23,50 +24,54 @@ const App: React.FC = () => {
     } catch (error) {
       console.error("Error fetching crypto data:", error);
     }
-  };
+  }, [apiKey]);
 
   useEffect(() => {
     fetchCryptoData();
-    const interval = setInterval(() => {
+
+    const dataInterval = setInterval(() => {
       fetchCryptoData();
       setCountdown(30);
     }, 30000);
-    const timer = setInterval(() => {
+
+    const countdownTimer = setInterval(() => {
       setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
+
     return () => {
-      clearInterval(interval);
-      clearInterval(timer);
+      clearInterval(dataInterval);
+      clearInterval(countdownTimer);
     };
-  }, []);
+  }, [fetchCryptoData]);
 
   return (
-    <div className="bg-gray-50 min-h-screen px-4 sm:px-6 lg:px-8 py-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-4">
-          Live Crypto Price Dashboard
-        </h1>
-        <p className="text-center text-gray-600 text-lg mb-10">
-          Refreshing in <span className="font-semibold text-gray-800">{countdown}s</span>
-        </p>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cryptoData.map((crypto) => (
-            <div
-              key={crypto.id}
-              onClick={() => setSelectedCoin(crypto.id)}
-              className="cursor-pointer transform hover:scale-105 transition-transform duration-200"
-            >
-              <CryptoCard
-                name={crypto.name}
-                price={crypto.priceUsd}
-                change={crypto.changePercent24Hr}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="mt-10">
-          <BitcoinChart apiKey={apiKey} coinId={selectedCoin} />
-        </div>
+    <div className="bg-gray-100 min-h-screen p-4 sm:p-6">
+      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+        Live Crypto Price Dashboard
+      </h1>
+
+      <p className="text-center text-gray-600 mb-6">
+        Refreshing in <span className="font-semibold">{countdown}s</span>
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {cryptoData.map((crypto) => (
+          <div
+            key={crypto.id}
+            onClick={() => setSelectedCoin(crypto.id)}
+            className="cursor-pointer"
+          >
+            <CryptoCard
+              name={crypto.name}
+              price={crypto.priceUsd}
+              change={crypto.changePercent24Hr}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="max-w-5xl mx-auto w-full">
+        <BitcoinChart apiKey={apiKey} coinId={selectedCoin} />
       </div>
     </div>
   );
