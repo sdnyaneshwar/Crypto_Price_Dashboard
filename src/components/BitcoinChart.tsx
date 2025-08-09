@@ -1,11 +1,33 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from "chart.js";
+
 
 interface BitcoinChartProps {
   apiKey: string;
   coinId: string;
 }
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 
 const BitcoinChart: React.FC<BitcoinChartProps> = ({ apiKey, coinId }) => {
   const [chartData, setChartData] = useState<any>(null);
