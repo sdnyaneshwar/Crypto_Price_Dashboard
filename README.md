@@ -55,7 +55,7 @@ Tracks Bitcoin, Ethereum, and Dogecoin prices in real time with an interactive c
 
 ## Preview
 ## Preview
-![Dashboard Screenshot](./assets/screenshot.png)
+![Dashboard Screenshot](./assets/Screenshot.png)
 
 ## Tech Stack
 - React with Hooks
