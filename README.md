@@ -1,46 +1,114 @@
-# Getting Started with Create React App
+# Live Crypto Price Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple and responsive cryptocurrency dashboard built with React and TypeScript.  
+Tracks Bitcoin, Ethereum, and Dogecoin prices in real time with an interactive chart and automatic updates every 30 seconds.
 
-## Available Scripts
+## Features
+- Live price updates every 30 seconds
+- Interactive price chart for the selected coin
+- Click on a coin card to change the chart
+- Responsive design for desktop and mobile
+- Uses CoinCap API for data
 
-In the project directory, you can run:
+## Tech Stack
+- React with Hooks
+- TypeScript
+- Axios
+- Chart.js with react-chartjs-2
+- Tailwind CSS
+- Netlify for deployment
 
-### `npm start`
+## Installation and Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Live Crypto Price Dashboard
 
-### `npm test`
+A simple and responsive cryptocurrency dashboard built with React and TypeScript.  
+Tracks Bitcoin, Ethereum, and Dogecoin prices in real time with an interactive chart and automatic updates every 30 seconds.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
+- Live price updates every 30 seconds
+- Interactive price chart for the selected coin
+- Click on a coin card to change the chart
+- Responsive design for desktop and mobile
+- Uses CoinCap API for data
 
-### `npm run build`
+## Preview
+(Add a screenshot here)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
+- React with Hooks
+- TypeScript
+- Axios
+- Chart.js with react-chartjs-2# Live Crypto Price Dashboard
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A simple and responsive cryptocurrency dashboard built with React and TypeScript.  
+Tracks Bitcoin, Ethereum, and Dogecoin prices in real time with an interactive chart and automatic updates every 30 seconds.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
+- Live price updates every 30 seconds
+- Interactive price chart for the selected coin
+- Click on a coin card to change the chart
+- Responsive design for desktop and mobile
+- Uses CoinCap API for data
 
-### `npm run eject`
+## Preview
+## Preview
+![Dashboard Screenshot](./assets/screenshot.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tech Stack
+- React with Hooks
+- TypeScript
+- Axios
+- Chart.js with react-chartjs-2
+- Tailwind CSS
+- Netlify for deployment
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Installation and Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Clone the repository:
+# Live Crypto Price Dashboard
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+A simple and responsive cryptocurrency dashboard built with React and TypeScript.  
+Tracks Bitcoin, Ethereum, and Dogecoin prices in real time with an interactive chart and automatic updates every 30 seconds.
 
-## Learn More
+## Features
+- Live price updates every 30 seconds
+- Interactive price chart for the selected coin
+- Click on a coin card to change the chart
+- Responsive design for desktop and mobile
+- Uses CoinCap API for data
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Preview
+(Add a screenshot here)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Tech Stack
+- React with Hooks
+- TypeScript
+- Axios
+- Chart.js with react-chartjs-2
+- Tailwind CSS
+- Netlify for deployment
+
+## Installation and Setup
+
+1. Clone the repository:
+
+2. Install dependencies:
+
+3. Create a .env file in the root folder:
+Get your free API key from https://coincap.io/
+
+4. Start the development server:
+npm install
+npm start
+Then open http://localhost:3000 in your browser.
+
+## Deployment on Netlify
+1. Push your code to GitHub
+2. Connect the repository to Netlify
+3. In Netlify environment variables, add:
+4. Build command:
+5. Publish directory:
+6. Deploy
